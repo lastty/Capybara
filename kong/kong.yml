@@ -1,0 +1,16 @@
+_format_version: "2.1"
+
+services:
+  - name: test-service
+    url: http://httpbin.org
+    routes:
+      - name: test-route
+        paths:
+          - /
+          
+plugins:
+  - name: rate-limiting
+    service: test-service
+    config:
+      minute: 5
+      policy: local

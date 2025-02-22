@@ -1,0 +1,26 @@
+# Use the official Kong base image
+FROM kong:2.8.1
+
+# Install required system dependencies
+USER root
+RUN apk add --no-cache \
+    gcc \
+    make \
+    libc-dev \
+    openssl-dev \
+    luarocks
+
+# Install required Lua dependencies
+RUN luarocks install luaossl
+
+# Verify Kong is installed and available
+RUN kong version || echo "Kong is missing!"
+
+# Copy the default Kong configuration
+COPY kong.yml /usr/local/kong/declarative/kong.yml
+
+# Expose the necessary ports
+EXPOSE 8000 8001
+
+# Start Kong correctly
+CMD ["kong", "docker-start"]

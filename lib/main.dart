@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'screens/admin_dashboard.dart'; // Import the Admin Dashboard screen
 
 void main() {
   runApp(MyApp());
@@ -41,10 +42,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text('Capybara App')),
-        body: Center(child: Text(_apiResponse)),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Capybara Admin',
+      theme: ThemeData.light(),
+      home: AdminDashboard(), // <-- Set the Admin Dashboard as the home screen
     );
   }
 }

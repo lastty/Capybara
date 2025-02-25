@@ -1,51 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'screens/admin_dashboard.dart'; // Import the Admin Dashboard screen
+import 'screens/admin_dashboard.dart'; // ✅ Make sure this import exists
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _apiResponse = "Fetching...";
-
-  @override
-  void initState() {
-    super.initState();
-    fetchAPI();
-  }
-
-  Future<void> fetchAPI() async {
-    try {
-      final response = await http.get(Uri.parse('http://localhost:5001'));
-      if (response.statusCode == 200) {
-        setState(() {
-          _apiResponse = response.body;
-        });
-      } else {
-        setState(() {
-          _apiResponse = "Error: ${response.statusCode}";
-        });
-      }
-    } catch (e) {
-      setState(() {
-        _apiResponse = "Failed to connect!";
-      });
-    }
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Capybara Admin',
+      title: 'Capybara App',
       theme: ThemeData.light(),
-      home: AdminDashboard(), // <-- Set the Admin Dashboard as the home screen
+      home: AdminDashboard(), // ✅ Make sure this class is defined
     );
   }
 }
